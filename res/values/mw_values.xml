@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CHAOZHUO START -->
+<resources>
+    <dimen name="mw_header_height">36dp</dimen>
+    <dimen name="big_screen_width">1200dp</dimen>
+    <dimen name="big_screen_height">700dp</dimen>
+    <dimen name="big_screen_window_width">1100dp</dimen>
+    <dimen name="big_screen_window_height">620dp</dimen>
+    <dimen name="window_screen_margin">30dp</dimen>
+    <dimen name="window_resizing_border">4dp</dimen>
+    <dimen name="frame_btn_width">42dp</dimen>
+    <dimen name="window_resize_minsize">320dp</dimen>
+</resources>
+<!-- CHAOZHUO END -->

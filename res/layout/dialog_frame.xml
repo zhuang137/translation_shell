@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CHAOZHUO START -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/window_frame"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/window_frame_bg" >
+
+    <!-- android:background="@drawable/window_frame_bg" -->
+
+    <LinearLayout
+        android:id="@+id/mwDecorHeader"
+        android:layout_alignLeft="@+id/decor_container"
+        android:layout_alignRight="@id/decor_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/window_frame_header_back"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/mwBackBtn"
+            android:layout_width="@dimen/frame_btn_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="0dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/window_frame_back" />
+
+        <ImageView
+            android:id="@+id/mwSep1"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="#eaeaea"/>
+
+        <LinearLayout
+            android:id="@+id/wmAppCustomized"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/mwTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/mw_header_height" />
+
+        <ImageButton
+            android:id="@+id/mwStretchBtn"
+            android:layout_width="@dimen/frame_btn_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/window_frame_drag" />
+
+        <ImageButton
+            android:id="@+id/mwMinBtn"
+            android:layout_width="@dimen/frame_btn_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/window_frame_min" />
+
+        <ImageButton
+            android:id="@+id/mwMaxBtn"
+            android:layout_width="@dimen/frame_btn_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/window_frame_maxmize" />
+
+        <ImageView
+            android:id="@+id/mwSep2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility = "invisible"
+            android:src="@drawable/window_frame_header_line" />
+
+        <ImageButton
+            android:id="@+id/mwCloseBtn"
+            android:layout_width="@dimen/frame_btn_width"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/window_frame_close" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/decor_container"
+        android:layout_below="@id/mwDecorHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/mwSepLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/window_frame_sepline" />
+    </FrameLayout>
+
+</RelativeLayout>
+<!-- CHAOZHUO END -->

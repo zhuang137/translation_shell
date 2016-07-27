@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CHAOZHUO START -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/window_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/window_frame_bg"
+    android:orientation="vertical" >
+
+    <!-- android:background="@drawable/window_frame_bg" -->
+
+    <RelativeLayout
+        android:id="@+id/mwDecorHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mw_header_height"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/mwPin"
+            android:layout_width="@dimen/frame_btn_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:src="@drawable/window_unpin" />
+        
+        <TextView
+            android:id="@+id/mwTitle"
+            android:layout_toLeftOf = "@id/mwPin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="left|center_vertical"
+            android:ellipsize="end"
+            android:paddingLeft="20dp"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.android.internal.policy.FakeDecorView
+            android:id="@+id/decor_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/mwSepLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/window_frame_sepline" />
+    </FrameLayout>
+
+</LinearLayout>
+<!-- CHAOZHUO END -->

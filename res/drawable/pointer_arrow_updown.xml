@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CHAOZHUO START -->
+<pointer-icon xmlns:android="http://schemas.android.com/apk/res/android"
+    android:bitmap="@drawable/point_arrow_up_down"
+    android:hotSpotX="14dp"
+    android:hotSpotY="14dp" />
+<!-- CHAOZHUO END -->

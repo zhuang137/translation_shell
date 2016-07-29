@@ -10,7 +10,6 @@ cat << EOF
 EOF
 declare -A operations
 T=`pwd -P`
-declare -r ss="${T}"
 operations=(['--help']='help1' ['--update']='update1' \
         ['--recreate']='recreate1' ['--writexml']='writexml'\
 		['--config']='config1' ['auto']='auto')

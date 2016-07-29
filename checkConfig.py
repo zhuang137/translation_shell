@@ -4,8 +4,11 @@ from fileUtil import getFileLines
 from config import PATH_CONFIG,PATH_DEFAULTXML,PATH_NAMESXML,XML_SUFFIX
 
 def XML_exist():
-	xmlList=GenerateFileList(path=PATH_CONFIG,suffix=XML_SUFFIX)
+	xmlList=GenerateFileList(path=PATH_CONFIG,suffix=XML_SUFFIX,category='.xml')
 	print xmlList
+	print [x for x in xmlList]
+	print os.path.split(PATH_DEFAULTXML)[1]
+	print os.path.split(PATH_NAMESXML)[1]
 	if os.path.split(PATH_DEFAULTXML)[1] not in xmlList or os.path.split(PATH_NAMESXML)[1] not in xmlList:
 		raise EnvironmentError('defaults.xml or names.xml doesn\'t exist')
 	print 'OK'
@@ -28,9 +31,4 @@ class GenerateFileLines(object):
 					continue
 				yield line.encode('utf-8')
 if __name__=='__main__':
-	#XML_line_comp()
-	#XML_exist()
-	from config import PATH_DEFAULTXML,PATH_NAMESXML
-	print list(GenerateFileLines(path=PATH_NAMESXML))
-	print list(GenerateFileLines(path=PATH_DEFAULTXML))
-
+	pass

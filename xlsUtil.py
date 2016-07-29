@@ -8,50 +8,55 @@ import os,xlrd
 from fileUtil import create_file
 from config import XLS_PATH,COMP_PATH
 class GenerateFileList(object):
-    def __init__(self,path='.',isLower=False,suffix=''):
+    def __init__(self,path='.',isLower=False,suffix='',category='.xls'):
         self.path=path
         self.isLower=isLower
         self.suffix=suffix
+        self.category=category
     def __iter__(self):
         #return generator
         if self.isLower:
-            return (os.path.splitext(xls)[0].lower()+self.suffix \
-                for xls in os.listdir(self.path) if xls.endswith('.xls') and '~' not in xls)
-        return (os.path.splitext(xls)[0]+self.suffix \
-            for xls in os.listdir(self.path) if xls.endswith('.xls') and '~' not in xls)
+            return (os.path.splitext(xls)[0].lower()+self.suffix
+                for xls in os.listdir(self.path) if xls.endswith(self.category) and '~' not in xls)
+        return (os.path.splitext(xls)[0]+self.suffix
+            for xls in os.listdir(self.path) if xls.endswith(self.category) and '~' not in xls)
 def compXls(**kwargs):
     srcXls=kwargs.pop('srcXls',None)
-    compXls=kwargs.pop('compXls',None)
+    compXlss=kwargs.pop('compXlss',None)
     if kwargs:
         raise TypeError('arguments error,you must give two args like this:srcXls=[...],compXls=[...]')
-    if not srcXls or not compXls:
+    if not srcXls or not compXlss:
         raise TypeError('list for srcXls or compXls may be null')
-    diffXls=[x for x in srcXls if "values-"+x not in compXls]
+    diffXls=[x for x in srcXls if "values-"+x not in compXlss]
     if diffXls:
         print "your xls named %r is not in compxls dir.we will update the dir now------" % (diffXls)
         print "compxls dir is only templates dir.these xls files are all 0KB"
         for xls in diffXls:
+            if xls.startswith('values-'):
+                continue
             path=os.path.join('./compxls','values-'+xls+'.xls')
             create_file(path=path)
 def update_xls_name():
     compXls(srcXls=GenerateFileList(XLS_PATH,isLower=True),
-        compXls=GenerateFileList(COMP_PATH,isLower=True))
+        compXlss=GenerateFileList(COMP_PATH,isLower=True))
     srcLowerXls=list(GenerateFileList(XLS_PATH,isLower=True))
     srcXls=list(GenerateFileList(XLS_PATH,isLower=False))
     compLowerXls=list(GenerateFileList(COMP_PATH,isLower=True))
-    compXls=list(GenerateFileList(COMP_PATH,isLower=False))
+    compXlss=list(GenerateFileList(COMP_PATH,isLower=False))
     print srcXls
     for srcIndex,xls in enumerate(srcLowerXls):
         try:
+            if xls.startswith('values-'):
+                continue
             compIndex=compLowerXls.index('values-'+xls)
             #print xls,compIndex
-            os.rename(os.path.join(XLS_PATH,srcXls[srcIndex]+'.xls'),os.path.join(XLS_PATH,compXls[compIndex]+'.xls'))
-            print "rename success:%r,%r" % (xls,compXls[compIndex])
+            os.rename(os.path.join(XLS_PATH,srcXls[srcIndex]+'.xls'),os.path.join(XLS_PATH,compXlss[compIndex]+'.xls'))
+            print "rename success:%r,%r" % (xls,compXlss[compIndex])
         except Exception,e:
             del srcLowerXls[:]
             del srcXls[:]
             del compLowerXls[:]
-            del compXls[:]
+            del compXlss[:]
             print 'update_xls_name error:index %r error' % xls
     print list(GenerateFileList(XLS_PATH,isLower=False))
 
@@ -80,7 +85,4 @@ def getValueFromSheet(country='',sheet=None,name=''):
 
 
 if __name__=="__main__":
-    #print comment
-    from config import XLS_PATH,COMP_PATH
-    #compXls(srcXls=GenerateFileList(XLS_PATH,isLower=True),compXls=GenerateFileList(COMP_PATH,isLower=True))
-    #update_xls_name()
+    print comment

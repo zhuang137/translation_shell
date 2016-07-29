@@ -1,4 +1,5 @@
 #!/bin/bash
+#-*- coding:utf-8 -*-
 if [ x$1 != x ]
 then
     echo "continue"
@@ -29,6 +30,7 @@ do
     sed -i 's/<\/resources>//' ${destXml}
     cat temp.txt >> ${destXml}
     sed -i '1i\'"$HEAD"'' ${destXml}
+    echo "insert success----${destXml}"
     continue
     elif [ -f ${destXml} ]
     then
@@ -36,6 +38,7 @@ do
     sed -i '$a\</resources>' temp.txt
     sed -i 's/<\/resources>//' ${destXml}
     cat temp.txt >> ${destXml}
+    echo "insert success----${destXml}"
     #cat temp.txt
     else
     echo "${destXml}} is invalid"

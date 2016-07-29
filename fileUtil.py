@@ -65,4 +65,4 @@ def writeNameAndValue(path='',name='',value=''):
 
 if __name__=="__main__":
     print comment
-    writeNode(path='out.xml',nodeDes="rrrreeeessss")
+    #writeNode(path='out.xml',nodeDes="rrrreeeessss")

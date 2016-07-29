@@ -1611,4 +1611,9 @@
     <string name="operator_name_china_unicom">"中国联通"</string>
     <string name="operator_name_china_telecom">"中国电信"</string>
 
+
+    <string name="input_dev">输入设备</string>
+    <string name="keyboard">Android 键盘</string>
+    <string name="halo_keyboard">Halo Keyboard</string>
+    <string name="english_uk">英语（英国）</string>
 </resources>

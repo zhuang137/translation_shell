@@ -5,6 +5,7 @@ from fileUtil import removeDir,create_dir,create_file,writeNameAndValue
 from fileUtil import writeNode
 from xlsUtil import GenerateFileList,update_xls_name,getSheetFromXls,getValueFromSheet
 import os,itertools,sys
+from config import NODE_HEADER,NODE_TAIL
 from checkConfig import GenerateFileLines,XML_exist,XML_line_comp
 commands=['--help','--config','--update','--recreate','--writexml','default']
 operator={}
@@ -24,21 +25,30 @@ def recreate_final_dir():
 		create_file(path=os.path.join(OVERLAY_PATH,srcXx,'strings.xml'))
 		print "create_file successly:%r" % os.path.join(OVERLAY_PATH,srcXx,'strings.xml')
 
-def writeStringToXml():
+def writeStringToXml(nodeNeed=False):
+	if not isinstance(nodeNeed,bool):
+		raise ValueError("writeStringToXml:nodeNeed must be bool(True or False)")
 	srcXls=GenerateFileList(path=XLS_PATH)
 	defaults=GenerateFileLines(path=PATH_DEFAULTXML)
 	names=GenerateFileLines(path=PATH_NAMESXML)
 	for xx in srcXls:
 		values=[]
+		if not xx.startswith('values-'):
+			print "error:请先运行--update 选项修正xls目录名字"
+			exit()
 		xlsPath=os.path.join(XLS_PATH,xx+'.xls')
 		strXmlPath=os.path.join(OVERLAY_PATH,xx,'strings.xml')
 		sheet=getSheetFromXls(xlsName=xlsPath)
 		for dd in defaults:
 			values.append(getValueFromSheet(country=xx,sheet=sheet,name=dd))
-		print values,xlsPath
+		#print values,xlsPath
+		if nodeNeed:
+			writeNode(path=strXmlPath,nodeDes=NODE_HEADER)
 		for name,value in itertools.izip(names,values):
 			writeNameAndValue(path=strXmlPath,name=name,value=value)
 		values=[]
+		if nodeNeed:
+			writeNode(path=strXmlPath,nodeDes=NODE_TAIL)
 
 def help():
 	print comment
@@ -53,8 +63,8 @@ def update():
 def recreate():
 	recreate_final_dir()
 
-def writexml():
-	writeStringToXml()
+def writexml(nodeNeed=False):
+	writeStringToXml(nodeNeed)
 
 def allExe():
 	config()
@@ -64,14 +74,20 @@ def allExe():
 
 operator={'--help':help,'--config':config,'--update':update,\
     '--recreate':recreate,'--writexml':writexml}
+extras={'yes':True,'no':False}
 
 
 if __name__=="__main__":
 	args=sys.argv
 	if len(args)==1:
 		allExe()
-	elif len(args)>2:
+	elif len(args)>3:
 		raise ValueError('invalid argument,only need one argument')
+	elif len(args)==3:
+		try:
+			operator.get(args[1])(extras.get(args[2]))
+		except Exception,e:
+		    print e
 	else:
 		try:
 			operator.get(args[1])()

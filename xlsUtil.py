@@ -27,7 +27,7 @@ def compXls(**kwargs):
         raise TypeError('arguments error,you must give two args like this:srcXls=[...],compXls=[...]')
     if not srcXls or not compXlss:
         raise TypeError('list for srcXls or compXls may be null')
-    diffXls=[x for x in srcXls if "values-"+x not in compXlss]
+    diffXls=[x for x in srcXls if "values-"+x not in compXlss and x not in compXlss]
     if diffXls:
         print "your xls named %r is not in compxls dir.we will update the dir now------" % (diffXls)
         print "compxls dir is only templates dir.these xls files are all 0KB"
@@ -43,7 +43,6 @@ def update_xls_name():
     srcXls=list(GenerateFileList(XLS_PATH,isLower=False))
     compLowerXls=list(GenerateFileList(COMP_PATH,isLower=True))
     compXlss=list(GenerateFileList(COMP_PATH,isLower=False))
-    print srcXls
     for srcIndex,xls in enumerate(srcLowerXls):
         try:
             if xls.startswith('values-'):

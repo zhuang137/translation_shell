@@ -45,9 +45,11 @@ def getFileLines(fileName=''):
         return nums
 
 def writeNode(path='',nodeDes=''):
-    print nodeDes+'...........'
     if not path or not nodeDes:
         raise ValueError('writeNode:path or nodeDes empty!!')
+    if not os.path.exists(path):
+        print "error:请先运行--recreate选项，重建final_res目录"
+        exit()
     with open(path,'a+') as ff:
         ff.write('\n')
         ff.write(nodeDes)
@@ -55,6 +57,9 @@ def writeNode(path='',nodeDes=''):
 def writeNameAndValue(path='',name='',value=''):
     if not path or not name:
         raise ValueError('writeNode:path or name empty!!')
+    if not os.path.exists(path):
+        print "error:请先运行--recreate选项，重建final_res目录"
+        exit()
     with open(path,'a+') as ff:
         ff.write('\n')
         from config import STRINGS_TEMPLATE as templates
